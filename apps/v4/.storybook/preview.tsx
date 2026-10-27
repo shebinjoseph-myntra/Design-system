@@ -7,6 +7,18 @@ import { withInspect } from "./inspect"
 const preview: Preview = {
   decorators: [withInspect],
   parameters: {
+    options: {
+      storySort: {
+        // Examples is a page at the bottom of Components, not its own section.
+        order: [
+          "Configure your project",
+          "Shadcn",
+          ["Components", ["*", "Variants", "Examples"]],
+          "Example",
+          "Playground",
+        ],
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,

@@ -14,3 +14,17 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
+
+export const AllVariants: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-3">
+      {(
+        ["default", "secondary", "destructive", "outline", "ghost", "link"] as const
+      ).map((variant) => (
+        <Badge key={variant} variant={variant}>
+          {variant}
+        </Badge>
+      ))}
+    </div>
+  ),
+}

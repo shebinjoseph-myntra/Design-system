@@ -1,4 +1,5 @@
 import type { ComponentProps } from "react"
+import { Button as AllVariantsButton } from "../registry/new-york-v4/ui/button"
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
 import { ArrowUp, Check, Plus, Search } from "lucide-react"
 import { fn } from "storybook/test"
@@ -110,3 +111,32 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
+
+export const AllVariants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-3">
+      {(
+        ["default", "secondary", "destructive", "outline", "ghost", "link"] as const
+      ).map((variant) => (
+        <div key={variant} className="flex flex-wrap items-center gap-3">
+          <span className="w-24 text-sm text-muted-foreground">{variant}</span>
+          {(["xs", "sm", "default", "lg"] as const).map((size) => (
+            <AllVariantsButton key={size} variant={variant} size={size}>
+              {size}
+            </AllVariantsButton>
+          ))}
+          {(["icon-xs", "icon-sm", "icon", "icon-lg"] as const).map((size) => (
+            <AllVariantsButton
+              key={size}
+              variant={variant}
+              size={size}
+              aria-label={size}
+            >
+              <Search />
+            </AllVariantsButton>
+          ))}
+        </div>
+      ))}
+    </div>
+  ),
+}

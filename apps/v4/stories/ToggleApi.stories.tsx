@@ -14,3 +14,20 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
+
+export const AllVariants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-3">
+      {(["default", "outline"] as const).map((variant) => (
+        <div key={variant} className="flex items-center gap-3">
+          <span className="w-20 text-sm text-muted-foreground">{variant}</span>
+          {(["sm", "default", "lg"] as const).map((size) => (
+            <Toggle key={size} variant={variant} size={size}>
+              {size}
+            </Toggle>
+          ))}
+        </div>
+      ))}
+    </div>
+  ),
+}

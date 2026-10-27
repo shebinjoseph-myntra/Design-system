@@ -26,7 +26,7 @@ import TooltipDemo from "../registry/new-york-v4/examples/tooltip-demo"
 import { TooltipProvider } from "../registry/new-york-v4/ui/tooltip"
 
 const meta = {
-  title: "Shadcn/Examples",
+  title: "Shadcn/Components/Examples",
 } satisfies Meta
 
 export default meta

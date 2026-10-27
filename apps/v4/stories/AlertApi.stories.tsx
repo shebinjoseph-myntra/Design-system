@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite"
+import { InfoIcon } from "lucide-react"
 
 import {
   Alert,
@@ -33,4 +34,18 @@ export const Default: Story = {
     translate: "no",
     "aria-autocomplete": "undefined",
   },
+}
+
+export const AllVariants: Story = {
+  render: () => (
+    <div className="flex w-full max-w-md flex-col gap-3">
+      {(["default", "destructive"] as const).map((variant) => (
+        <Alert key={variant} variant={variant}>
+          <InfoIcon />
+          <AlertTitle>{variant}</AlertTitle>
+          <AlertDescription>This is the {variant} variant.</AlertDescription>
+        </Alert>
+      ))}
+    </div>
+  ),
 }

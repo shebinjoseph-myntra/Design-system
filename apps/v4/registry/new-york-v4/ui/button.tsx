@@ -11,13 +11,13 @@ const buttonVariants = cva(
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary-hover",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive focus-visible:ring-focus-destructive",
+          "bg-destructive text-destructive-foreground hover:bg-[color-mix(in_srgb,var(--destructive),var(--foreground)_15%)] focus-visible:ring-focus-destructive",
         outline:
           "border border-primary bg-background text-primary shadow-xs hover:bg-accent",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary-hover",
+          "bg-secondary text-secondary-foreground hover:bg-[color-mix(in_srgb,var(--secondary),var(--primary)_12%)]",
         ghost:
-          "bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground",
+          "bg-transparent text-foreground hover:bg-accent hover:text-foreground",
         link: "bg-transparent text-primary underline-offset-4 hover:underline",
       },
       size: {
@@ -32,6 +32,14 @@ const buttonVariants = cva(
         "icon-lg": "size-10 text-sm",
       },
     },
+    compoundVariants: [
+      // Icon-only link buttons have no text to underline, so tint the background.
+      {
+        variant: "link",
+        size: ["icon", "icon-xs", "icon-sm", "icon-lg"],
+        className: "hover:bg-secondary",
+      },
+    ],
     defaultVariants: {
       variant: "default",
       size: "default",

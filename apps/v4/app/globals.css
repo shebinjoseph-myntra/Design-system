@@ -261,6 +261,40 @@
     }
   }
 
+  /* Browsers paint autofilled/suggested values with a hard-coded blue that
+     ignores background-color. Repaint it with the brand tint (--secondary),
+     and tint the whole input-group so the colour fills the entire field
+     instead of a patch behind the inner input.
+     !important: component utilities (shadow-none, dark:bg-input/30) live in a
+     later layer and would otherwise cancel these. */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active,
+  input:autofill,
+  textarea:-webkit-autofill,
+  textarea:autofill,
+  select:-webkit-autofill,
+  select:autofill {
+    -webkit-text-fill-color: var(--foreground) !important;
+    caret-color: var(--foreground) !important;
+    box-shadow: 0 0 0 1000px var(--secondary) inset !important;
+    transition: background-color 9999s ease-in-out 0s;
+  }
+
+  /* The inner input is 1px taller than the group's content box (h-9 inside a
+     1px border), so its tint would paint over the border/focus colour. Clip
+     that overflow; the group is tinted the same colour, so nothing shows. */
+  [data-slot="input-group"] input:-webkit-autofill,
+  [data-slot="input-group"] input:autofill {
+    clip-path: inset(1px 0);
+  }
+
+  [data-slot="input-group"]:has(input:autofill),
+  [data-slot="input-group"]:has(input:-webkit-autofill) {
+    background-color: var(--secondary) !important;
+  }
+
   a:active,
   button:active {
     @apply opacity-60 md:opacity-100;
